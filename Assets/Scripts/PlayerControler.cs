@@ -15,6 +15,8 @@ public class PlayerControler : MonoBehaviour
     public Transform groundCheck;
     public LayerMask groundMask;
 
+    public Gun gun;
+
     private CharacterController controller;
     private Vector3 velocity;
     private bool grounded;
@@ -33,10 +35,21 @@ public class PlayerControler : MonoBehaviour
             velocity.y = -2f;
         }
 
+        doShoot();
+
         doJump();
 
         //doRotation();
         doMovement();
+    }
+
+    void doShoot()
+    {
+        if(Input.GetButtonDown("Fire1"))
+        {
+            Debug.Log("SHOOT");
+            gun.shoot();
+        }
     }
 
     void doRotation()
