@@ -8,8 +8,16 @@ public class PlayerControler : MonoBehaviour
     public float rotationSpeed = 540f;
     public float speed = 10;
 
+    public float gravity = -9.81f;
+    public float jumpHeight = 3f;
+
+    public float groundDistance = 0.4f;
+    public Transform groundCheck;
+    public LayerMask groundMask;
+
     private CharacterController controller;
-    private Vector3 clickDestinationPosition;
+    private Vector3 velocity;
+    private bool grounded;
 
     void Start()
     {
@@ -18,8 +26,16 @@ public class PlayerControler : MonoBehaviour
 
     void Update()
     {
-        doRotation();
+        grounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        
+        if (grounded && velocity.y < 0)
+        {
+            velocity.y = -2f;
+        }
 
+        doJump();
+
+        //doRotation();
         doMovement();
     }
 
@@ -36,6 +52,17 @@ public class PlayerControler : MonoBehaviour
 
         Vector3 move = transform.right * x + transform.forward * z;
         controller.Move(move * speed * Time.deltaTime);
+    }
+
+    void doJump()
+    {
+        if (Input.GetButtonDown("Jump") && grounded)
+        {
+            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+        }
+
+        velocity.y += gravity * Time.deltaTime;
+        controller.Move(velocity * Time.deltaTime); // h = 1/2g * t^2
     }
 
 
