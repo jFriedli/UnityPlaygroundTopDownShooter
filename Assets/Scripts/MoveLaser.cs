@@ -11,12 +11,15 @@ public class MoveLaser : MonoBehaviour
     private float counter;
     private float dist;
 
+    [HideInInspector]
     public GameObject originProjectile;
+    [HideInInspector]
     public GameObject destinationEnemy;
 
     // Start is called before the first frame update
     void Start()
     {
+        FindObjectOfType<AudioManager>().play("Laser");
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.startWidth = width;
 

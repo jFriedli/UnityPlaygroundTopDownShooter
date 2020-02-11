@@ -94,6 +94,9 @@ public class PlayerHolder : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1") && Time.time > lastAttacked + attackDelay && oneShotOk())
         {
+
+            FindObjectOfType<AudioManager>().play("Shot");
+
             switch (weapon)
             {
                 case Weapon.Simple:

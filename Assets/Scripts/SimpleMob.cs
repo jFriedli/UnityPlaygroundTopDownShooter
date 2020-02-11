@@ -40,6 +40,9 @@ public class SimpleMob : MonoBehaviour
     void die()
     {
         player.GetComponent<PlayerHolder>().points += pointsToGive;
+
+        FindObjectOfType<AudioManager>().play("Death");
+
         Destroy(this.gameObject);
     }
 
