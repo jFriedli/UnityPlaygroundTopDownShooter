@@ -64,7 +64,6 @@ public class SimpleMob : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.tag);
         if (other.tag == "Player")
         {
             FindObjectOfType<GameManager>().gameOver();

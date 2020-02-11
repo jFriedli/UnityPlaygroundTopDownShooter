@@ -1,9 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerHolder : MonoBehaviour
 {
+    public enum Weapon { Simple, PassThrough}
+
+    public Weapon weapon;
+    public bool oneShot = false;
     public float movementSpeed;
     public float rotationSpeed;
 
@@ -20,7 +22,10 @@ public class PlayerHolder : MonoBehaviour
     public LayerMask groundMask;
 
     public Transform bulletSpawnTransform;
-    public GameObject bullet;
+    public GameObject simpleBullet;
+    public GameObject passThroughBullet;
+
+    public bool projectileInAir = false;
 
     GameManager gameManager;
     CharacterController controller;
@@ -55,6 +60,7 @@ public class PlayerHolder : MonoBehaviour
         {
             doShoot();
             doJump();
+            doSwitchWeapon();
         }
     }
 
@@ -86,11 +92,27 @@ public class PlayerHolder : MonoBehaviour
 
     void doShoot()
     {
-        if (Input.GetButtonDown("Fire1") && Time.time > lastAttacked + attackDelay)
+        if (Input.GetButtonDown("Fire1") && Time.time > lastAttacked + attackDelay && oneShotOk())
         {
-            Instantiate(bullet.transform, bulletSpawnTransform.position, bulletSpawnTransform.rotation);
+            switch (weapon)
+            {
+                case Weapon.Simple:
+                    Instantiate(simpleBullet.transform, bulletSpawnTransform.position, bulletSpawnTransform.rotation);
+                    break;
+                case Weapon.PassThrough:
+                    Instantiate(passThroughBullet.transform, bulletSpawnTransform.position, bulletSpawnTransform.rotation);
+                    break;
+
+            }
             lastAttacked = Time.time;
         }
+    }
+
+    bool oneShotOk()
+    {
+        if (!oneShot)
+            return true;
+        return !projectileInAir;
     }
 
     void doJump()
@@ -109,5 +131,20 @@ public class PlayerHolder : MonoBehaviour
 
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime); // h = 1/2g * t^2
+    }
+
+    void doSwitchWeapon()
+    {
+        if (Input.GetButtonDown("Fire2"))
+        {
+            if (weapon == Weapon.PassThrough)
+            {
+                weapon = Weapon.Simple;
+            } else
+            {
+                weapon = Weapon.PassThrough;
+                oneShot = true;
+            }
+        }
     }
 }
