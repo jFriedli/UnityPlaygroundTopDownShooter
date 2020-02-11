@@ -7,9 +7,18 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public float restartDelay = 2f;
+    public float titleDelay = 2f;
     public Text death;
+    public Text title;
 
     public bool gameHasEnded = false;
+
+    void Start()
+    {
+            title.text = "Next Try";
+        Invoke("clearTitle", restartDelay);
+    }
+
     public void gameOver()
     {
         if(!gameHasEnded)
@@ -23,5 +32,10 @@ public class GameManager : MonoBehaviour
     void restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    void clearTitle()
+    {
+        title.text = "";
     }
 }
