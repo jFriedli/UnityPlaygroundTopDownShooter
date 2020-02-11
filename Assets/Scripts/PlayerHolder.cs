@@ -9,25 +9,35 @@ public class PlayerHolder : MonoBehaviour
 
     public int points = 0;
 
+    public float attackDelay = 1.0f;
+
     public Transform playerModelTransform;
 
     public Transform bulletSpawnTransform;
     public GameObject bullet;
 
+    GameManager gameManager;
     CharacterController controller;
+
+    float lastAttacked;
 
     // Start is called before the first frame update
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        doRotation();
-        doMovement();
-        doShoot();
+        if (!gameManager.gameHasEnded)
+        {
+            doRotation();
+            doMovement();
+            doShoot();
+        }
+
     }
 
     void doRotation()
@@ -58,9 +68,11 @@ public class PlayerHolder : MonoBehaviour
 
     void doShoot()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && Time.time > lastAttacked + attackDelay)
         {
-            Instantiate(bullet.transform, bulletSpawnTransform.position, bulletSpawnTransform.rotation); 
+            Instantiate(bullet.transform, bulletSpawnTransform.position, bulletSpawnTransform.rotation);
+            lastAttacked = Time.time;
         }
+
     }
 }

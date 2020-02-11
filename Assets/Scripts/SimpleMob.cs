@@ -56,14 +56,18 @@ public class SimpleMob : MonoBehaviour
         return Vector3.Distance(transform.position, playerTransform.position) < visibilityRange;
     }
 
-    bool inAir()
-    {
-        return transform.position.y > 1.5f;
-    }
-
     void chase()
     {
         transform.LookAt(playerTransform.position);
         characterController.SimpleMove(transform.forward * speed);
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        Debug.Log(other.tag);
+        if (other.tag == "Player")
+        {
+            FindObjectOfType<GameManager>().gameOver();
+        }
     }
 }
