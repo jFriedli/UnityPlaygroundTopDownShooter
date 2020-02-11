@@ -15,6 +15,8 @@ public class PlayerControler : MonoBehaviour
     public Transform groundCheck;
     public LayerMask groundMask;
 
+    public int points = 0;
+
     public Gun gun;
 
     private CharacterController controller;
