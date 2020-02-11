@@ -35,9 +35,17 @@ public class PlayerHolder : MonoBehaviour
         {
             doRotation();
             doMovement();
-            doShoot();
         }
 
+    }
+
+    // Note: Can't do button detection in FixedUpdate
+    private void Update()
+    {
+        if (!gameManager.gameHasEnded)
+        {
+            doShoot();
+        }
     }
 
     void doRotation()
@@ -73,6 +81,5 @@ public class PlayerHolder : MonoBehaviour
             Instantiate(bullet.transform, bulletSpawnTransform.position, bulletSpawnTransform.rotation);
             lastAttacked = Time.time;
         }
-
     }
 }
