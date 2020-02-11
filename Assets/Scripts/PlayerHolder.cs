@@ -7,17 +7,26 @@ public class PlayerHolder : MonoBehaviour
     public float movementSpeed;
     public float rotationSpeed;
 
+    public float gravity = -9.81f;
+    public float jumpHeight = 3f;
+    public float groundDistance = 0.4f;
+
     public int points = 0;
 
     public float attackDelay = 1.0f;
 
     public Transform playerModelTransform;
+    public Transform groundCheck;
+    public LayerMask groundMask;
 
     public Transform bulletSpawnTransform;
     public GameObject bullet;
 
     GameManager gameManager;
     CharacterController controller;
+
+    Vector3 velocity;
+    bool grounded;
 
     float lastAttacked;
 
@@ -45,6 +54,7 @@ public class PlayerHolder : MonoBehaviour
         if (!gameManager.gameHasEnded)
         {
             doShoot();
+            doJump();
         }
     }
 
@@ -81,5 +91,23 @@ public class PlayerHolder : MonoBehaviour
             Instantiate(bullet.transform, bulletSpawnTransform.position, bulletSpawnTransform.rotation);
             lastAttacked = Time.time;
         }
+    }
+
+    void doJump()
+    {
+        grounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+
+        if (grounded && velocity.y < 0)
+        {
+            velocity.y = -2f;
+        }
+
+        if (Input.GetButtonDown("Jump") && grounded)
+        {
+            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+        }
+
+        velocity.y += gravity * Time.deltaTime;
+        controller.Move(velocity * Time.deltaTime); // h = 1/2g * t^2
     }
 }

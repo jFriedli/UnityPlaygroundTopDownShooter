@@ -15,7 +15,6 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-            title.text = "Next Try";
         Invoke("clearTitle", restartDelay);
     }
 

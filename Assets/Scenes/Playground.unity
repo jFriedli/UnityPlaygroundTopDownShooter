@@ -505,7 +505,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 5.537e-42, y: 1.04e-43, z: 3.08e-43, w: 0}
+  m_BoundingSphereOverride: {x: 3.1e-43, y: 6.5062e-41, z: 3.12e-43, w: 19270.156}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -2364,9 +2364,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 10
   rotationSpeed: 5
+  gravity: -9.81
+  jumpHeight: 3
+  groundDistance: 0.4
   points: 0
   attackDelay: 0.5
   playerModelTransform: {fileID: 1373574649}
+  groundCheck: {fileID: 2064948787}
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 512
   bulletSpawnTransform: {fileID: 328418086}
   bullet: {fileID: 7006460436335499861, guid: 1a9dbfe377fae3d479c94783e817e3fb, type: 3}
 --- !u!143 &1504124349
