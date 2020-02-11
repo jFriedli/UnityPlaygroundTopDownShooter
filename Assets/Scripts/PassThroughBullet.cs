@@ -30,7 +30,6 @@ public class PassThroughBullet : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        transform.rotation.x += Time.deltaTime;
 
         transform.Translate(Vector3.forward * bulletSpeed * Time.deltaTime);
         currentTimeInAir += 1.0f * Time.deltaTime;
