@@ -11,12 +11,6 @@ public class SimpleBullet : MonoBehaviour
     float currentTimeInAir = 0;
     GameObject triggeringEnemy;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {

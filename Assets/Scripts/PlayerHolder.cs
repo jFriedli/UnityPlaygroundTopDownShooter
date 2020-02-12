@@ -9,6 +9,10 @@ public class PlayerHolder : MonoBehaviour
     public float movementSpeed;
     public float rotationSpeed;
 
+    public float boostSpeed;
+    public float boostMax = 100;
+    public float boostCurrent = 0;
+
     public float gravity = -9.81f;
     public float jumpHeight = 3f;
     public float groundDistance = 0.4f;
@@ -87,7 +91,15 @@ public class PlayerHolder : MonoBehaviour
         float z = Input.GetAxis("Vertical");
 
         Vector3 movement = new Vector3(x, y, z);
-        controller.Move(movement * movementSpeed * Time.deltaTime);
+
+        if(Input.GetButton("Boost") && boostCurrent > 0)
+        {
+            controller.Move(movement * boostSpeed * Time.deltaTime);
+            boostCurrent -= 1;
+        } else
+        {
+            controller.Move(movement * movementSpeed * Time.deltaTime);
+        }
     }
 
     void doShoot()
