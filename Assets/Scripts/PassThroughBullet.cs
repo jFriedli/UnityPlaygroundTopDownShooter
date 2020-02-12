@@ -64,6 +64,8 @@ public class PassThroughBullet : MonoBehaviour
             moveLaser.destinationEnemy = other.gameObject;
 
             lasers.Add(moveLaser.gameObject);
+
+
         }
 
         if(other.tag == "Player" && currentTimeInAir > 0.5)

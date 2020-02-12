@@ -407,14 +407,26 @@ MonoBehaviour:
   sounds:
   - name: Death
     clip: {fileID: 8300000, guid: 535b8ed3984a33d4cb3abbdbc970be8c, type: 3}
-    volume: 0
-    pitch: 0
+    volume: 0.26
+    pitch: 0.42
     loop: 0
     source: {fileID: 0}
   - name: Theme
-    clip: {fileID: 8300000, guid: 535b8ed3984a33d4cb3abbdbc970be8c, type: 3}
-    volume: 0
-    pitch: 0
+    clip: {fileID: 8300000, guid: 43036b77d68e93f41a9a9d11b2dcc61d, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: Shot
+    clip: {fileID: 8300000, guid: fd7d84c4a0923934c9067c72d9625c50, type: 3}
+    volume: 0.37
+    pitch: 0.84
+    loop: 0
+    source: {fileID: 0}
+  - name: Laser
+    clip: {fileID: 8300000, guid: 7a16e4a4c5e96174a8a87884ed0ac9b7, type: 3}
+    volume: 0.35
+    pitch: 1.47
     loop: 0
     source: {fileID: 0}
 --- !u!1001 &132503585
