@@ -141,6 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 219c7e86d789af84286a9d05b38c60f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  origin: {fileID: 0}
-  destination: {fileID: 0}
+  width: 0.05
   lineDrawSpeed: 6
+  originProjectile: {fileID: 0}
+  destinationEnemy: {fileID: 0}
